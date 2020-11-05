@@ -1,13 +1,21 @@
+body {
+  background-color: white; /* change later */
+  color: black;
+}
+
 /* Nav Bar */
 .grid {
   display: grid;
 }
 
 /* Nav Bar List */
-nav ul li {
+nav li {
   list-style-type: none;
 }
 
+nav a {
+  text-decoration: none;
+}
 /* CSS Grid Styles */
 .grid-container {
   display: grid;
@@ -23,11 +31,10 @@ nav ul li {
 }
 
 .title {
-  background-color: lightblue;
 }
 
+/* Search Styles */
 .search {
-  background-color: lightblue;
 }
 
 .searchbar {
@@ -35,11 +42,21 @@ nav ul li {
   height: 30px;
 }
 
+.searchbtn {
+  width: 50px;
+  height: 35px;
+}
+
+/* About Styles */
 .about {
-  background-color: lightblue;
+  background-color: rgb(236, 236, 236);
   border: 2px solid;
 }
 
 .about h2 {
   text-align: center;
+}
+
+.about p {
+  padding: 20px;
 }
