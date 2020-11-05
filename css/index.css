@@ -1,17 +1,25 @@
+/* Nav Bar */
 .grid {
   display: grid;
-  background-color: lightblue;
 }
 
+/* Nav Bar List */
 nav ul li {
   list-style-type: none;
 }
 
+/* CSS Grid Styles */
 .grid-container {
   display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  gap: 10%;
+  width: 700px;
+  margin: auto; /* centers grid */
+}
+
+.grid-item {
+  margin: auto;
+  align-content: center;
 }
 
 .title {
@@ -22,6 +30,16 @@ nav ul li {
   background-color: lightblue;
 }
 
+.searchbar {
+  width: 200px;
+  height: 30px;
+}
+
 .about {
   background-color: lightblue;
+  border: 2px solid;
+}
+
+.about h2 {
+  text-align: center;
 }
