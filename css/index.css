@@ -21,7 +21,6 @@ nav a {
   display: grid;
   justify-content: center;
   gap: 10%;
-  width: 700px;
   margin: auto; /* centers grid */
 }
 
@@ -51,6 +50,7 @@ nav a {
 .about {
   background-color: rgb(236, 236, 236);
   border: 2px solid;
+  width: 60%;
 }
 
 .about h2 {
