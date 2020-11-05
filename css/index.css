@@ -1,0 +1,27 @@
+.grid {
+  display: grid;
+  background-color: lightblue;
+}
+
+nav ul li {
+  list-style-type: none;
+}
+
+.grid-container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.title {
+  background-color: lightblue;
+}
+
+.search {
+  background-color: lightblue;
+}
+
+.about {
+  background-color: lightblue;
+}
