@@ -1,0 +1,20 @@
+{
+  "name": "lyrically",
+  "version": "1.0.0",
+  "description": "Lyrically is a CS-465P project intended to find songs that match your favorite lyric!",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alyssa-vy/lyrically.git"
+  },
+  "author": "Alyssa Vy, Michael Wilson, Mackenzie Gage",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alyssa-vy/lyrically/issues"
+  },
+  "homepage": "https://github.com/alyssa-vy/lyrically#readme",
+  "dependencies": {}
+}
