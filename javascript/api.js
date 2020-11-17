@@ -2,13 +2,14 @@
 
 // had to prefix with https://cors-anywhere.herokuapp.com to get past CORS error
 var api_key = '1227c8dc748dfe0b1fb9cda395e207ce	';
-var keyword = 'apple';
-let url = 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_lyrics='+keyword+'&apikey='+api_key;
+//var keyword = 'apple';
+//let url = 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_lyrics='+keyword+'&apikey='+api_key;
 
 function lyricFind(input)
 {
     // Get user input
-    keyword = input
+    let keyword = input
+    let url = 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_lyrics='+keyword+'&apikey='+api_key
 
     // find tracks that contain the lyric ___
     fetch(url) 
