@@ -5,24 +5,28 @@ var api_key = '1227c8dc748dfe0b1fb9cda395e207ce	';
 //var keyword = 'apple';
 //let url = 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_lyrics='+keyword+'&apikey='+api_key;
 
-function lyricFind(input)
+function lyricFind(keyword)
 {
     // Get user input
-    let keyword = input
-    let url = 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_lyrics='+keyword+'&apikey='+api_key
+    let cors = `https://api.allorigins.win/raw?url=`
+    let url = `http://api.musixmatch.com/ws/1.1/track.search?q_lyrics=${keyword}&apikey=${api_key}`
 
     // find tracks that contain the lyric ___
-    fetch(url) 
+    fetch(cors+encodeURIComponent(url)) 
         .then(response => {
             console.log('Response Success!', response);
             return response.json();
         })
+        .then(data =>
+            {
+                console.log('Initial Data', data.message)
+            })
         .then(data => {
             console.log('Data', data);
             var searchTrack = data.message.body.track_list[2].track.track_id;
             // find a specific track and print the lyrics
-            let url2 = 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id='+searchTrack+'&apikey='+api_key;
-            fetch(url2)
+            let url2 = 'http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id='+searchTrack+'&apikey='+api_key;
+            fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url2)}`)
                 .then(response => {
                     console.log('Response Success!', response);
                     return response.json();
