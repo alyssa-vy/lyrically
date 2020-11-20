@@ -7,7 +7,7 @@ MicroModal.init({
     disableScroll: true, 
     disableFocus: false, 
     awaitOpenAnimation: false, 
-    awaitCloseAnimation: false, 
+    awaitCloseAnimation: true, 
     debugMode: true
 });
 MicroModal.show('modal-1');
