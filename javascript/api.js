@@ -33,7 +33,7 @@ function getSong(input)
     })
 }
 
-// Get song lyrcics based on song id
+// Get song lyrics based on song id
 function getLyrics(song_id)
 {
     return new Promise((resolve, reject) =>
@@ -61,7 +61,7 @@ function getLyrics(song_id)
 // Get Albums Art
 function getArt(album_id)
 {
-    let url = `http://api.musixmatch.com/ws/1.1/album.get?album_id='${album_id}&apikey=${api_key}`
+    let url = `http://api.musixmatch.com/ws/1.1/album.get?album_id=${album_id}&apikey=${api_key}`
 
     return new Promise((resolve, reject) =>
     {
