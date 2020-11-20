@@ -6,8 +6,10 @@ https://gist.github.com/ghosh/4f94cf497d7090359a5c9f81caf60699
 \**************************/
 
 .modal {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+  /*font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
     helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+    */
+  font-family: "Roboto", sans-serif;
 }
 
 .modal__overlay {
@@ -96,6 +98,7 @@ https://gist.github.com/ghosh/4f94cf497d7090359a5c9f81caf60699
 .modal__btn:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
+  background-color: lightblue;
 }
 
 .modal__btn-primary {

@@ -23,6 +23,9 @@ results.push(result10);
 let container = document.getElementById("results-container");
 
 function createCard(song){
+    let link = document.createElement("a");
+    link.setAttribute("href", "javascript:void(0)");
+    link.setAttribute("data-micromodal-trigger", "modal-1");
     let card = document.createElement("div");
     card.className += "song-card";
 
@@ -49,7 +52,8 @@ function createCard(song){
     card.appendChild(cardTitle);
     card.appendChild(cardArtist);
     card.appendChild(cardAlbum);
-    return card;
+    link.appendChild(card);
+    return link;
 }
 
 for (song of results) {
