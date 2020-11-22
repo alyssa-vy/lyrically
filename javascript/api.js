@@ -58,6 +58,10 @@ function getLyrics(song_id)
     })
 }
 
+
+/* It seems that Musixmatch does not support Album Art on the free API
+We replaced the getArt() with getSpotifyArt()
+
 // Get Album Art
 function getArt(album_id)
 {
@@ -82,7 +86,7 @@ function getArt(album_id)
             })
     })
 }
-
+*/
 /****** Spotify Api Functions *****/
 
 // Request an API Token
@@ -123,120 +127,47 @@ function getToken()
     })        
 }
 
-// Get Album Art
+// Get Album Art From Spotify
 function getSpotifyAlbumArt(albumName)
 {
     const base_url = 'https://api.spotify.com/v1/search'
 
-    getToken()
-    .then(result =>
-    {
-        fetch(`${base_url}?q=${albumName}&type=album&limit=10`,
-        {
-            method: 'GET',
-            headers: 
-            {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + result
-            }
-        })
-            .then(response =>
-            {
-                console.log('getAlbumID() Reponse:', response)
-                return response.json()
-            })
-            .then(data =>
-            {
-                /*  Album Cover Art comes in 3 sizes
-                    images[0] is 600x600 px
-                    images[1] is 300x300 px
-                    images[2] is 64x64  px
-                */
-                 console.log('getAlbumId() Fulfilled:', data.albums)
-                return (data.albums.items[0].images[1])
-            })
-            .catch(error =>
-            {
-                console.log('Get getAlbumId() Error:', error)
-            })
-    })
-    
- 
-    /*
-    // First we get the Album Id
-    const base_url = 'https://api.spotify.com/v1/search'
-
-    let albumId = new Promise((resolve, reject) =>
-    {
-        fetch(`${base_url}?q=${albumName}&type=album&limit=10`,
-        {
-            method: 'GET',
-            headers: 
-            {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
-            }
-        })
-            .then(response =>
-            {
-                console.log('getAlbumID() Reponse:', response)
-                return response.json()
-            })
-            .then(data =>
-            {
-                console.log('getAlbumId() Fulfilled:', data)
-                resolve(data)
-            })
-            .catch(error =>
-            {
-                console.log('Get getAlbumId() Error:', error)
-            })
-    })
-
-
-*/
-
-
-
-
-
-
-/*
-    let url = `https://api.spotify.com/v1/albums/${albumId}`
-    // I brute forced the access token, but it is temporary. 
-    // It may last up to an hour
-    // Remove once the Authentication Function is done
-    //let access_token = 'BQDwfuhSRIryoU73mqvEkiatbp1w3c4qWn4duqK58H8blQ_BeAkPwUWttqlDwyDs10ZY0ycErJbrxe3-emlJPasmAWpFxUYMr2QH2p_6x4QPm13D77wByM6F3dGC2HurVDmY5V_pMyZQNwNRTmJ01LiAVLiBdQIbf7sg_20'
-    let access_token = getToken()
-
     return new Promise((resolve, reject) =>
     {
-        fetch(url,
+        // Get Spotify Access Token
+        getToken()
+        .then(result =>
         {
-            method: 'GET',
-            headers: 
+            // Get Album Search
+            fetch(`${base_url}?q=${albumName}&type=album&limit=10`,
             {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
-            }
+                method: 'GET',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + result
+                }
+            })
+                .then(response =>
+                {
+                    console.log('getSpotifyAlbumArt() Reponse:', response)
+                    return response.json()
+                })
+                .then(data =>
+                {
+                    /*  Album Cover Art comes in 3 sizes
+                        images[0] is 600x600 px
+                        images[1] is 300x300 px
+                        images[2] is 64x64  px
+                    */
+                    console.log('getSpotifyAlbumArt() Fulfilled:', data.albums.items)
+                    resolve (data.albums.items[0].images[1])
+                })
+                .catch(error =>
+                {
+                    console.log('getSpotifyAlbumArt() Error:', error)
+                })
         })
-            .then(response =>
-            {
-                console.log('Get Album Art: Reponse Sucess', response)
-                return response.json()
-            })
-            .then(data =>
-            {
-                console.log(data.images[0].url)
-                return data.images[0].url
-            })
-            .catch(error =>
-            {
-                console.log('Get Album Art Error:', error)
-            })
     })
-    */
 }
