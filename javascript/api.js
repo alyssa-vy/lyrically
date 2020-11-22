@@ -83,49 +83,21 @@ function getArt(album_id)
     })
 }
 
-// Spotify Stuff
+/****** Spotify Api Functions *****/
 
-
-// Get's Album Art from Spotify
+// Request an API Token
 function getToken()
 {
     // Credentials
     const client_id = 'bd1d313f66964b76b79b54c2e747f016'
     const client_secret = '4486dfa8c90d4b85963a9a46e27638fc'
-    const redirect_uri = 'http://127.0.0.1:5500/lyrically/html/'
-    const heroku = 'https://cors-anywhere.herokuapp.com/'
-    const base_url = 'https://accounts.spotify.com/authorize'
     const post_url = 'https://accounts.spotify.com/api/token'
- /*   
-    // Implicit Grant Flow
-    let url = `${base_url}?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=token`
-
-    return new Promise((resolve, reject) =>
-    {
-        fetch(cors+url)
-            .then(response =>
-            {
-                console.log('Token Fetch', response)
-                return response.text()
-            })
-            .then(data =>
-            {
-                console.log('Token Response Fulfilled:', data)
-                resolve(data)
-            })
-            .catch(error =>
-            {
-                console.log('Token Error:', error)
-            })
-    })
-*/
-    // Client Credentials Flow
-
-
-    const authOptions =
+ 
+    // Client Credentials Flow as Specified in https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
+    const options =
     {
         method: 'POST',
-        url: 'https://accounts.spotify.com/api/token',
+        url: post_url,
         headers:
         {         
             'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
@@ -134,80 +106,24 @@ function getToken()
         body: 'grant_type=client_credentials'
     }
     
-    let token = new Promise((resolve, reject) =>
+    return new Promise((resolve, reject) =>
     {
-        fetch(post_url, authOptions)
+        fetch(post_url, options)
         .then(response => 
         { 
-            console.log(response) 
+            console.log('getToken() Sucess Response:', response) 
             return response.json()
         })
         .then(data =>
         {
-            console.log('Spotify Token:', data.access_token)
+            console.log('getToken() Fulfilled Response:', data.access_token)
             resolve(data.access_token)
         })
-        .catch(error =>
-        {
-            console.log('Get Album Art:', error)
-        })
+        .catch(error => console.log('getToken() Error:', error))
     })        
-
-    console.log('token variable', token)
-
-
-/*
-    var 
-    let access_token = function() 
-    {
- 
-
-        const get_token = async () =>
-        {
-            const result = await fetch(`https://accounts.spotify.com/api/token`,
-            {
-                method: 'POST',
-                headers:
-                {
-                    'Content-Type' : 'application/x-www-form-urlencoded',
-                    'Authorization' : 'Basic ' + btoa(client_id + ':' + client_secret)
-                },
-                body: 'grant_type=client_credentials'
-            }) 
-            console.log('API Authorization Result', data)
-            const data = await result.json()
-            return data.access_token
-        }
-    }
-
-    let album_id = '0sNOF9WDwhWunNAHPD3Baj' //test value
-    let url = `https://api.spotify.com/v1/albums/${album_id}`
-     
-    return new Promise((resolve, reject) =>
-    {
-        fetch(url,
-        {
-            method: 'GET',
-            headers: 
-            {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + access_token
-            }
-        })
-            .then(response =>
-            {
-                console.log('Get Album Art: Reponse Sucess', response)
-                return response.json()
-            })
-            .catch(error =>
-            {
-                console.log('Get Album Art Error:', error)
-            })
-    })
-    */
 }
 
+// Get Album Art
 function getSpotifyAlbumArt(albumId)
 {
     // I put a test value for albumId - remove when ready
