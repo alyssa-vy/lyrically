@@ -58,7 +58,7 @@ function getLyrics(song_id)
     })
 }
 
-// Get Albums Art
+// Get Album Art
 function getArt(album_id)
 {
     let url = `http://api.musixmatch.com/ws/1.1/album.get?album_id=${album_id}&apikey=${api_key}`
@@ -124,10 +124,86 @@ function getToken()
 }
 
 // Get Album Art
-function getSpotifyAlbumArt(albumId)
+function getSpotifyAlbumArt(albumName)
 {
-    // I put a test value for albumId - remove when ready
-    albumId = '0sNOF9WDwhWunNAHPD3Baj' 
+    const base_url = 'https://api.spotify.com/v1/search'
+
+    getToken()
+    .then(result =>
+    {
+        fetch(`${base_url}?q=${albumName}&type=album&limit=10`,
+        {
+            method: 'GET',
+            headers: 
+            {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + result
+            }
+        })
+            .then(response =>
+            {
+                console.log('getAlbumID() Reponse:', response)
+                return response.json()
+            })
+            .then(data =>
+            {
+                /*  Album Cover Art comes in 3 sizes
+                    images[0] is 600x600 px
+                    images[1] is 300x300 px
+                    images[2] is 64x64  px
+                */
+                 console.log('getAlbumId() Fulfilled:', data.albums)
+                return (data.albums.items[0].images[1])
+            })
+            .catch(error =>
+            {
+                console.log('Get getAlbumId() Error:', error)
+            })
+    })
+    
+ 
+    /*
+    // First we get the Album Id
+    const base_url = 'https://api.spotify.com/v1/search'
+
+    let albumId = new Promise((resolve, reject) =>
+    {
+        fetch(`${base_url}?q=${albumName}&type=album&limit=10`,
+        {
+            method: 'GET',
+            headers: 
+            {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        })
+            .then(response =>
+            {
+                console.log('getAlbumID() Reponse:', response)
+                return response.json()
+            })
+            .then(data =>
+            {
+                console.log('getAlbumId() Fulfilled:', data)
+                resolve(data)
+            })
+            .catch(error =>
+            {
+                console.log('Get getAlbumId() Error:', error)
+            })
+    })
+
+
+*/
+
+
+
+
+
+
+/*
     let url = `https://api.spotify.com/v1/albums/${albumId}`
     // I brute forced the access token, but it is temporary. 
     // It may last up to an hour
@@ -162,4 +238,5 @@ function getSpotifyAlbumArt(albumId)
                 console.log('Get Album Art Error:', error)
             })
     })
+    */
 }
