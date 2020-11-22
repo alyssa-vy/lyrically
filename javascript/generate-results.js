@@ -40,6 +40,8 @@ function addCardsToPage(results) {
     }
 }
 
+// If we're on the results page and load the window, create cards
+// Makes so this script isn't executed on index.html
 if(window.location.href.match("../html/results.html") != null) {
     window.onload = addCardsToPage(JSON.parse(sessionStorage.getItem("searchResults")));
 }
