@@ -21,11 +21,12 @@
   </head>
   <body>
     <div class="navbar">
-      <a href= "#"><i class="material-icons md-dark">home</i></a>
+      <a href= "index.html"><i class="material-icons md-dark">home</i></a>
       <div class="search-container">      
         <form>
           <input type="text" id="search-bar" placeholder="New Search..." name="search">
-          <button type="submit"><i class="material-icons md-dark">search</i></button>
+          <!-- TODO Figure out why this doesn't work -->
+          <button type="submit" onclick="performSearch(document.getElementById('search-bar').value)"><i class="material-icons md-dark">search</i></button>
         </form>
       </div>
     </div>
@@ -69,5 +70,7 @@
     </div>
     <script src="../javascript/song-modal.js" type="module"></script>
     <script src="../javascript/generate-results.js"></script>
+    <script src="../javascript/search.js"></script>
+    <script src="../javascript/api.js"></script>
   </body>
 </html>
