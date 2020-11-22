@@ -4,6 +4,16 @@ function performSearch(lyric){
     songResults = convertResults(lyric);
     songResults.then( (result) => {
         console.log(result);
+        sessionStorage.setItem("searchResults", JSON.stringify(result));
+    })
+    .then( () => {
+        let searchResults = JSON.parse(sessionStorage.getItem("searchResults"));
+        console.log(searchResults);
+    })
+    .then( () =>{
+        // Load up the results window after saving datat to sessionStorage
+        // When results load, cards will be generated in generate-results.js
+        window.location.href = "../html/results.html";
     })
 }
 

@@ -39,3 +39,7 @@ function addCardsToPage(results) {
         container.appendChild(songCard);
     }
 }
+
+if(window.location.href.match("../html/results.html") != null) {
+    window.onload = addCardsToPage(JSON.parse(sessionStorage.getItem("searchResults")));
+}
