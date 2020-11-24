@@ -3,6 +3,8 @@ const app = require('express')()
 const server = require('http').createServer(app)
 const express = require('express')
 const path = require('path')
+require('dotenv').config()
+
 // Const Starter Pack
 const hostname = 'localhost'
 const port = 3000
