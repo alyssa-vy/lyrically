@@ -10,5 +10,3 @@ MicroModal.init({
     awaitCloseAnimation: true, 
     debugMode: true
 });
-MicroModal.show('modal-1');
-MicroModal.close('modal-1');
