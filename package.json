@@ -16,5 +16,7 @@
     "url": "https://github.com/alyssa-vy/lyrically/issues"
   },
   "homepage": "https://github.com/alyssa-vy/lyrically#readme",
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
