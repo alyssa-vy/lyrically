@@ -82,22 +82,50 @@ function createModalDivs(modalNum) {
 }
 
 // Set info for Modals based off of the cards they are tied to 
-function createModalInfo(title, artist, album, artwork, songNum) {
+function createModalInfo(title, artist, album, artwork, songNum, songID) {
+    // Create Title of Modal
     let modalTitle = document.getElementById(`modal-${songNum}-title`);
     let modalContainer = document.getElementById(`modal-${songNum}-content`);
     modalTitle.appendChild(document.createTextNode(title));
-    let displayArt = document.createElement("img");
-    displayArt.src = artwork;
-    displayArt.className += "card-artwork";
 
+    // Display Album Art
+    let displayArt = document.createElement("div")
+    let artImg = document.createElement("img");
+    displayArt.appendChild(artImg);
+    artImg.src = artwork;
+    displayArt.className += "modal__artwork";
+    artImg.alt = `${album} Cover`;
+
+    // Fetch Lyrics and add to Modal
+    let displayLyrics = document.createElement("div");
+    let para = document.createElement("p");
+    displayLyrics.appendChild(para);
+    let lyricResults = getLyrics(songID);
+    lyricResults.then( (result) => {
+        console.log(result);
+        result = JSON.stringify(result);
+        // get rid of \n and add in <br>
+        result = result.replace(/\\n/g, "<br />");
+        // edit lyric formatting
+        result = result.substring(1, result.indexOf("..."));
+        console.log(result);
+        para.innerHTML = result;
+        displayLyrics.className += "modal__lyrics";
+    })
+
+    // Add Title
     let displayTitle = document.createElement("div");
     displayTitle.appendChild(document.createTextNode(`Title: ${title}`));
+    // Add Artist
     let displayArtist = document.createElement("div");
     displayArtist.appendChild(document.createTextNode(`Artist: ${artist}`));
+    // Add Album
     let displayAlbum = document.createElement("div");
     displayAlbum.appendChild(document.createTextNode(`Album: ${album}`));
 
     modalContainer.appendChild(displayArt);
+    modalContainer.appendChild(displayLyrics);
+
     modalContainer.appendChild(displayTitle);
     modalContainer.appendChild(displayArtist);
     modalContainer.appendChild(displayAlbum);
@@ -142,7 +170,7 @@ function createCard(song, songNum){
     link.appendChild(card); // makes cards clickable for modals
 
     // set Modal Info based off of cards
-    createModalInfo(song.title, song.artist, song.album, song.artwork, songNum);
+    createModalInfo(song.title, song.artist, song.album, song.artwork, songNum, song.id);
 
     return link;
 }
