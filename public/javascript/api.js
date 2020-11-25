@@ -1,9 +1,6 @@
 // fetching api data
-
 // had to prefix with https://cors-anywhere.herokuapp.com to get past CORS error
-//var api_key = '1227c8dc748dfe0b1fb9cda395e207ce	';
 // Mike's Key
-var api_key = '6bc9f28bbd80025649863c8396ddde40'
 //var keyword = 'apple';
 //let url = 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_lyrics='+keyword+'&apikey='+api_key;
 const cors = `https://api.allorigins.win/raw?url=`
