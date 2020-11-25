@@ -11,16 +11,20 @@ const cors = `https://api.allorigins.win/raw?url=`
 // Returns an Array of 10 Songs
 function getSong(input)
 {
+    // Get user input
+    let url = `/getsong/${input}`
+    //const response = await fetch(url)
+    //const json = await response.json()
+    //track_list = json.message.body.track_list
+    
     return new Promise((resolve, reject) =>
     {
-        // Get user input
-        let url = `http://api.musixmatch.com/ws/1.1/track.search?q_lyrics=${input}&f_has_lyrics&apikey=${api_key}`
-
-        // find tracks that contain the lyric ___
-        fetch(cors+encodeURIComponent(url)) 
-            .then(response => {
-                console.log('Get Song: Response Success!', response);
-                return response.json();
+        // find tracks that contain the lyric
+        fetch(url)
+            .then(response => 
+            {
+                console.log('Get Song: Response Success!', response)
+                return response.json()
             })
             .then(data =>
                 {
@@ -36,11 +40,11 @@ function getSong(input)
 // Get song lyrics based on song id
 function getLyrics(song_id)
 {
+    let url = `/getLyrics/${song_id}`
+
     return new Promise((resolve, reject) =>
     {
-        let url = `http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${song_id}&apikey=${api_key}`
-
-        fetch(cors+encodeURIComponent(url))
+        fetch(url)
             .then(response => 
             {
                 console.log('Get Lyrics: Response Sucess', response)
