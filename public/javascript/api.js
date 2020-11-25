@@ -37,14 +37,14 @@ function getSong(input)
 // Get song lyrics based on song id
 function getLyrics(song_id)
 {
-    let url = `/getLyrics/${song_id}`
+    let url = `/getlyrics/${song_id}`
 
     return new Promise((resolve, reject) =>
     {
         fetch(url)
             .then(response => 
             {
-                console.log('Get Lyrics: Response Sucess', response)
+                console.log('Get Lyrics: Response Success', response)
                 return response.json() 
             })
             .then(data => 
@@ -94,12 +94,15 @@ function getArt(album_id)
 function getToken()
 {
     // Credentials
-    const client_id = 'bd1d313f66964b76b79b54c2e747f016'
-    const client_secret = '4486dfa8c90d4b85963a9a46e27638fc'
-    const post_url = 'https://accounts.spotify.com/api/token'
+    //const client_id = 'bd1d313f66964b76b79b54c2e747f016'
+   // const client_secret = '4486dfa8c90d4b85963a9a46e27638fc'
+    //const post_url = 'https://accounts.spotify.com/api/token'
+ 
+    let url = 'token'
+
  
     // Client Credentials Flow as Specified in https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
-    const options =
+    /*const options =
     {
         method: 'POST',
         url: post_url,
@@ -110,10 +113,12 @@ function getToken()
         },
         body: 'grant_type=client_credentials'
     }
+ */
+
     
     return new Promise((resolve, reject) =>
     {
-        fetch(post_url, options)
+        fetch(url)
         .then(response => 
         { 
             console.log('getToken() Sucess Response:', response) 
@@ -131,8 +136,35 @@ function getToken()
 // Get Album Art From Spotify
 function getSpotifyAlbumArt(albumName)
 {
-    const base_url = 'https://api.spotify.com/v1/search'
+    //const base_url = 'https://api.spotify.com/v1/search'
 
+    let url = `/albums/${albumName}`
+    
+    return new Promise((resolve, reject) =>
+    {
+        fetch(url)
+            .then(response => 
+            {
+                console.log('getSpotifyAlbumArt() Reponse:', response)
+                    return response.json()
+                })
+                .then(data =>
+                {
+                    /*  Album Cover Art comes in 3 sizes
+                        images[0] is 600x600 px
+                        images[1] is 300x300 px
+                        images[2] is 64x64  px
+                    */
+                    console.log('getSpotifyAlbumArt() Fulfilled:', data.albums.items)
+                    resolve (data.albums.items[0].images[1])
+                 })
+                .catch(error =>
+                {
+                    console.log('getSpotifyAlbumArt() Error:', error)
+                })
+    })
+ 
+    /*
     return new Promise((resolve, reject) =>
     {
         // Get Spotify Access Token
@@ -162,13 +194,13 @@ function getSpotifyAlbumArt(albumName)
                         images[1] is 300x300 px
                         images[2] is 64x64  px
                     */
-                    console.log('getSpotifyAlbumArt() Fulfilled:', data.albums.items)
+                /*    console.log('getSpotifyAlbumArt() Fulfilled:', data.albums.items)
                     resolve (data.albums.items[0].images[1])
-                })
+                 })
                 .catch(error =>
                 {
                     console.log('getSpotifyAlbumArt() Error:', error)
                 })
         })
-    })
+    }) */
 }
