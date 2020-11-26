@@ -32,12 +32,9 @@ a {
   border: 2px solid #184e51;
 }
 
-.song-card:hover .card-title,
-.song-card:active .card-title,
-.song-card:hover .card-artist,
-.song-card:active .card-artist,
-.song-card:hover .card-album,
-.song-card:active .card-album {
+/* Change the color of all text fields inside of the cards when hovered over */
+.song-card:hover div,
+.song-card:active div {
   color: #222831;
 }
 
