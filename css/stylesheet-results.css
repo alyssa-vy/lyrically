@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #222831;
 }
 
 a {
@@ -12,15 +13,29 @@ a {
   display: grid;
   grid-template-columns: 120px 1fr;
   grid-template-rows: repeat(3, 1fr);
-  background-color: lightblue;
+  background-color: #184e51;
   height: 120px;
   margin: 0px 10px;
   padding-right: 10px;
+  border: solid 2px #eee;
+  border-radius: 15px;
 }
 
 .song-card:hover,
 .song-card:active {
   border: 2px solid black;
+  background-color: #f7bda7;
+}
+
+.song-card:hover .card-artwork,
+.song-card:active .card-artwork {
+  border: 2px solid #184e51;
+}
+
+/* Change the color of all text fields inside of the cards when hovered over */
+.song-card:hover div,
+.song-card:active div {
+  color: #222831;
 }
 
 .card-artwork {
@@ -28,6 +43,7 @@ a {
   height: 84%;
   width: 84%;
   margin: 8%;
+  border: 2px solid #eee;
 }
 
 #results-container {
@@ -53,6 +69,7 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #eee;
 }
 
 .card-artist {
@@ -61,6 +78,7 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #eee;
 }
 
 .card-album {
@@ -71,6 +89,7 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #eee;
 }
 
 #lyrically {
@@ -81,14 +100,15 @@ a {
 
 .navbar {
   overflow: hidden;
-  background-color: teal;
   margin-bottom: 10px;
+  background-color: #393e46;
+  border-bottom: solid 2px #f7bda7;
 }
 
 .navbar a {
   float: left;
   display: block;
-  color: black;
+  color: #eee;
   text-align: center;
   padding: 10px 10px;
 }
