@@ -1,6 +1,15 @@
 //Takes a lyric from the user and retrieves data of song related to that lyric
 function performSearch(lyric){
     // window.location.href = "../html/results.html";
+
+    // Allows the results search to work and I don't really fully understand whyyyyy --Mike
+const form = document.getElementById('form')
+
+form.addEventListener("submit", function(event)
+{
+  event.preventDefault()
+})
+
     songResults = convertResults(lyric);
     songResults.then( (result) => {
         console.log(result);
@@ -67,3 +76,4 @@ function convertResults(lyric) {
 //         })
 //     })
 // }
+
