@@ -22,7 +22,6 @@ spotifyApi.clientCredentialsGrant().then(
     function(data)
     {
         spotifyApi.setAccessToken(data.body['access_token'])
-        console.log('token: ', data.body['access_token'])
     },
     function(err)
     {
@@ -55,7 +54,6 @@ app.get('/getsong/:lyrics', async (request, response) =>
     
     // API Fetch
     const song_response = await fetch(url)
-    console.log('Server url fetch: ', url)
     const song_data = await song_response.json()
     const data = song_data
     console.log('Server song_data: ', song_data)
