@@ -113,6 +113,11 @@ a {
   padding: 10px 10px;
 }
 
+.navbar a:hover,
+.navbar a:active {
+  color: #f7bda7;
+}
+
 .navbar .search-container {
   float: right;
 }
