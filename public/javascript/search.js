@@ -42,8 +42,6 @@ function convertResults(lyric) {
                     title: result.track.track_name,
                     album: result.track.album_name,
                     id: result.track.track_id,
-                    artwork: "http://placekitten.com/200/200" //temp holder
-                    // artwork: getArt(result.track.albumid)
                 };
                 // add the song to the results
                 songResults.push(song);
@@ -52,3 +50,20 @@ function convertResults(lyric) {
         })
     })
 }
+
+
+// function findArt(albumName) {
+//     return new Promise((resolve, reject) => {
+//         const albumResults = getSpotifyAlbumArt(albumName);
+//         albumResults.then(data => {
+//             if(data) {
+//                 console.log(data);
+//                 // resolve(data[0].images[1].url);
+//                 resolve(data.url);
+//             }
+//             else {
+//                 resolve("http://placekitten.com/200/200");
+//             }
+//         })
+//     })
+// }
