@@ -157,6 +157,8 @@ function createCard(song, songNum){
     artResults.then( (result) => {
         console.log(result);
         cardArtwork.src = result.url;
+        // set Modal Info based off of cards
+        createModalInfo(song.title, song.artist, song.album, result.url, songNum, song.id);
     })
 
     cardArtist.className += "card-artist";
@@ -176,8 +178,7 @@ function createCard(song, songNum){
 
     link.appendChild(card); // makes cards clickable for modals
 
-    // set Modal Info based off of cards
-    createModalInfo(song.title, song.artist, song.album, song.artwork, songNum, song.id);
+    
 
     return link;
 }
