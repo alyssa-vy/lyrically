@@ -15,6 +15,9 @@ function performSearch(lyric){
         // When results load, cards will be generated in generate-results.js
         window.location.href = "../html/results.html";
     })
+    .catch(error => {
+        console.log('Request Failed', error);
+    })
 }
 
 
