@@ -96,21 +96,37 @@ function createModalInfo(title, artist, album, artwork, songNum, songID) {
     displayArt.className += "modal__artwork";
     artImg.alt = `${album} Cover`;
 
-    // Fetch Lyrics and add to Modal
+    // Create Lyrics Div
     let displayLyrics = document.createElement("div");
     let para = document.createElement("p");
     displayLyrics.appendChild(para);
+    displayLyrics.className += "modal__lyrics";
+
+    // Create Copyright Div
+    let displayCopy = document.createElement("div");
+    let copyPara = document.createElement("p");
+    displayCopy.appendChild(copyPara);
+    displayCopy.className += "modal__copyright";
+
+    
     let lyricResults = getLyrics(songID);
     lyricResults.then( (result) => {
         console.log(result);
-        result = JSON.stringify(result);
+        var lyrics = result.lyrics;
+        lyrics = JSON.stringify(lyrics);
         // get rid of \n and add in <br>
-        result = result.replace(/\\n/g, "<br />");
+        lyrics = lyrics.replace(/\\n/g, "<br />");
         // edit lyric formatting
-        result = result.substring(1, result.indexOf("..."));
-        console.log(result);
-        para.innerHTML = result;
-        displayLyrics.className += "modal__lyrics";
+        lyrics = lyrics.substring(1, lyrics.indexOf("..."));
+        para.innerHTML = lyrics;
+        // get copyright
+        var copyright = result.copyright;
+        copyright = JSON.stringify(copyright);
+        console.log(copyright);
+        copyright = copyright.replace("www.musixmatch.com", "<a href='https://musixmatch.com'>musixmatch</a>");
+        // add to paragraph div
+        copyPara.innerHTML = copyright;
+        
     })
 
     // Add Title
@@ -125,6 +141,7 @@ function createModalInfo(title, artist, album, artwork, songNum, songID) {
 
     modalContainer.appendChild(displayArt);
     modalContainer.appendChild(displayLyrics);
+    modalContainer.appendChild(displayCopy);
 
     modalContainer.appendChild(displayTitle);
     modalContainer.appendChild(displayArtist);
