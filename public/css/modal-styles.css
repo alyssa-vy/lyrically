@@ -40,7 +40,7 @@ This was then edited to fit Lyrically's needs.
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(199, 199, 199);
+  background-color: #f7bda7;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   padding: 30px;
@@ -53,8 +53,29 @@ This was then edited to fit Lyrically's needs.
   font-weight: 600;
   font-size: 1.25rem;
   line-height: 1.25;
-  color: #00449e;
+  color: black;
   box-sizing: border-box;
+}
+
+.modal__copyright {
+  display: block;
+}
+.modal__copyright p {
+  background: #f7bda7;
+  border-left: 10px solid #f79c78;
+  padding: 0.5em 10px;
+  font-size: 0.75em;
+  color: black;
+}
+.modal__copyright a:link,
+a:visited {
+  color: #ff5353;
+  text-decoration: underline;
+}
+
+.modal__copyright a:hover {
+  color: white;
+  text-decoration: none;
 }
 
 /* MusixMatch requires that we add in these special css rules to prevent copying and printing of lyrics */
@@ -64,7 +85,7 @@ This was then edited to fit Lyrically's needs.
   }
 }
 .modal__lyrics {
-  padding: 20px;
+  padding: 10px;
   font-style: italic;
   -moz-user-select: none;
   -khtml-user-select: none;

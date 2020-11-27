@@ -42,7 +42,12 @@ function getLyrics(song_id)
             .then(data => 
             {
                 console.log('Get Lyrics: Response Fulfilled', data.message.body.lyrics.lyrics_body)
-                resolve(data.message.body.lyrics.lyrics_body)
+                var toReturn = {
+                    lyrics: data.message.body.lyrics.lyrics_body,
+                    copyright: data.message.body.lyrics.lyrics_copyright,
+                }
+                resolve(toReturn);
+                //resolve(data.message.body.lyrics.lyrics_body)
             })
             .catch(error => 
             {
