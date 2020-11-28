@@ -56,6 +56,30 @@ function getLyrics(song_id)
     })
 }
 
+// Get Artist Info
+function getArtist(artist_id)
+{
+    let url = `/getartist/${artist_id}`
+
+    return new Promise((resolve, reject) =>
+    {
+        fetch(url)
+            .then(response => 
+            {
+                console.log('Get Artist: Response Success', response)
+                return response.json() 
+            })
+            .then(data => 
+            {
+                console.log('Get Artist: Response Fulfilled', data.message.body.artist)
+                resolve(data.message.body.artist);
+            })
+            .catch(error => 
+            {
+                console.log('Get Artist: Request Failed', error)
+            })
+    })
+}
 
 /* It seems that Musixmatch does not support Album Art on the free API
 We replaced the getArt() with getSpotifyArt()
@@ -111,6 +135,7 @@ function getSpotifyAlbumArt(albumName)
                         images[2] is 64x64  px
                     */
                     console.log('getSpotifyAlbumArt() Fulfilled:', data.albums.items)
+                    // If can't find album, then return a pre-defined image
                     resolve (data.albums.items[0].images[1])
                  })
                 .catch(error =>

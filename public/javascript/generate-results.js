@@ -82,7 +82,7 @@ function createModalDivs(modalNum) {
 }
 
 // Set info for Modals based off of the cards they are tied to 
-function createModalInfo(title, artist, album, artwork, songNum, songID) {
+function createModalInfo(title, artist, artistID, album, artwork, songNum, songID) {
     // Create Title of Modal
     let modalTitle = document.getElementById(`modal-${songNum}-title`);
     let modalContainer = document.getElementById(`modal-${songNum}-content`);
@@ -128,6 +128,35 @@ function createModalInfo(title, artist, album, artwork, songNum, songID) {
         copyPara.innerHTML = copyright;
         
     })
+    
+    let displayAlias = document.createElement("div");
+    displayAlias.className += "modal__alias";
+    // Get Artist Info from Musixmatch API
+    let artistInfo = getArtist(artistID);
+    artistInfo.then( (result) => {
+        let temp = document.createElement("span");
+        temp.innerHTML += "Known Aliases: ";
+
+        // If there are no known aliases, then put N/A in the box
+        if (result.artist_alias_list === undefined || result.artist_alias_list.length == 0) {
+            var alias = "N/A, ";
+            temp.innerHTML += alias;
+        }
+        // Else, list all the aliases
+        else {
+            for (alias of result.artist_alias_list) {
+                console.log(alias.artist_alias);
+                var aliasEdited = JSON.stringify(alias.artist_alias);
+                aliasEdited = aliasEdited.substring(1);
+                // Connect multiple aliases with a comma
+                aliasEdited = aliasEdited.replace('"', ", ");
+                temp.innerHTML += aliasEdited;
+            }
+        }
+        // remove last comma
+        temp.innerHTML = temp.innerHTML.substring(0, temp.innerHTML.length-2);
+        displayAlias.appendChild(temp);
+    })
 
     // Add Title
     let displayTitle = document.createElement("div");
@@ -145,6 +174,7 @@ function createModalInfo(title, artist, album, artwork, songNum, songID) {
 
     modalContainer.appendChild(displayTitle);
     modalContainer.appendChild(displayArtist);
+    modalContainer.appendChild(displayAlias);
     modalContainer.appendChild(displayAlbum);
 }
 
@@ -167,7 +197,7 @@ function createCard(song, songNum){
     let artistInfo = document.createTextNode(`Artist: ${song.artist}`);
     let titleInfo = document.createTextNode(`Song: ${song.title}`);
     let albumInfo = document.createTextNode(`Album: ${song.album}`);
-    cardArtwork.alt = `${song.album} Cover`;
+    // cardArtwork.src = song.artwork;
 
     // Fetch and set the artwork
     let artResults = getSpotifyAlbumArt(song.artist);
@@ -175,7 +205,7 @@ function createCard(song, songNum){
         console.log(result);
         cardArtwork.src = result.url;
         // set Modal Info based off of cards
-        createModalInfo(song.title, song.artist, song.album, result.url, songNum, song.id);
+        createModalInfo(song.title, song.artist, song.artistID, song.album, result.url, songNum, song.id);
     })
 
     cardArtist.className += "card-artist";
