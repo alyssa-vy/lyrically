@@ -1,6 +1,15 @@
 //Takes a lyric from the user and retrieves data of song related to that lyric
 function performSearch(lyric){
     // window.location.href = "../html/results.html";
+
+    // Allows the results search to work and I don't really fully understand whyyyyy --Mike
+const form = document.getElementById('form')
+
+form.addEventListener("submit", function(event)
+{
+  event.preventDefault()
+})
+
     songResults = convertResults(lyric);
     songResults.then( (result) => {
         console.log(result);
@@ -42,7 +51,10 @@ function convertResults(lyric) {
                     title: result.track.track_name,
                     album: result.track.album_name,
                     id: result.track.track_id,
+                    release: result.track.track_rating,
+                    artistID: result.track.artist_id,
                 };
+
                 // add the song to the results
                 songResults.push(song);
             }
@@ -67,3 +79,4 @@ function convertResults(lyric) {
 //         })
 //     })
 // }
+
