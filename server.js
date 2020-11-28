@@ -83,6 +83,27 @@ app.get('/getlyrics/:song_id', async (request, response) =>
     response.json(data)
 })
 
+// Get Artist from Artist ID
+app.get('/getartist/:artist_id', async (request, response) =>
+{
+    // Get the Artist ID
+    const artist_id = request.params.artist_id
+    console.log(artist_id)
+
+    // Setup API
+    const api_key = process.env.MUSIXMATCH_KEY
+    const url = `http://api.musixmatch.com/ws/1.1/artist.get?artist_id=${artist_id}&apikey=${api_key}`
+    
+    // API Fetch
+    const artist_response = await fetch(url)
+    console.log('Server artist_url fetch: ', url)
+    const artist_data = await artist_response.json()
+    
+    const data = artist_data
+    console.log('Server artist_data: ', artist_data)
+    response.json(data)   
+})
+
 // Get Album from Spotify based on its name
 app.get('/albums/:album_name', async (request, response) =>
 {
@@ -96,6 +117,28 @@ app.get('/albums/:album_name', async (request, response) =>
     response.json(results.body)      
 })
 
+// Get Track Preview from Spotify ID
+app.get('/tracks/:track_id', async (request, response) =>
+{
+    // Get the Track ID
+    const track_id = request.params.track_id
+    console.log(track_id)
+    let result = await spotifyApi.getTrack(track_id);
+    
+    console.log(result.body.preview_url)
+    response.json(result.body.preview_url);      
+})
+
+app.get('/search/:artist&:track', async (request, response) =>
+{
+    // Get the Track ID
+    const artist = request.params.artist;
+    const track = request.params.track;
+    console.log(`Artist: ${artist}, Track: ${track}`);
+    let result = await spotifyApi.searchTracks(`artist:${artist} track:${track}`);
+    console.log(result.body);
+    response.json(result.body);      
+})
 app.listen(port, hostname, () => 
 {
     console.log(`Server running at http://${hostname}:${port}/`)

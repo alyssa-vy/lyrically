@@ -82,7 +82,7 @@ function createModalDivs(modalNum) {
 }
 
 // Set info for Modals based off of the cards they are tied to 
-function createModalInfo(title, artist, album, artwork, songNum, songID) {
+function createModalInfo(title, artist, artistID, album, artwork, songNum, songID) {
     // Create Title of Modal
     let modalTitle = document.getElementById(`modal-${songNum}-title`);
     let modalContainer = document.getElementById(`modal-${songNum}-content`);
@@ -129,6 +129,69 @@ function createModalInfo(title, artist, album, artwork, songNum, songID) {
         
     })
 
+    // Create div for track preview
+    let displayPreview = document.createElement("div");
+    displayPreview.className += "modal__preview";
+    // Find Track in Spotify from Artist & Title
+    let track = searchSpotifyTrack(artist, title);
+    track.then( (result) => {
+        console.log("TEST searchSpotifyTrack: " + result);
+        if (result.length != 0) {
+            // get the uri or ID from the first result
+            var spotifyID = result[0].uri;
+            spotifyID = JSON.stringify(spotifyID);
+            // chop off irrelevant items
+            spotifyID = spotifyID.substring(15, spotifyID.length-1);
+            console.log(`Spotify ID = ${spotifyID}`); 
+            /*
+            let track_preview = getSpotifyTrack(spotifyID);
+            track_preview.then( (data) => {
+                console.log("Preview URL: " + data);
+            })
+            */
+            // Embed Spotify Preview !
+            let iframe = document.createElement("iframe");
+            iframe.src = `https://open.spotify.com/embed/track/${spotifyID}`;
+            iframe.frameborder = "0";
+            iframe.allowTransparency = "true";
+            iframe.allow = "encrypted-media";
+            displayPreview.appendChild(iframe);
+        }
+        else {
+            displayPreview.innerHTML = "No Preview Available";
+        }
+    });
+    
+
+    let displayAlias = document.createElement("div");
+    displayAlias.className += "modal__alias";
+    // Get Artist Info from Musixmatch API
+    let artistInfo = getArtist(artistID);
+    artistInfo.then( (result) => {
+        let temp = document.createElement("span");
+        temp.innerHTML += "Known Aliases: ";
+
+        // If there are no known aliases, then put N/A in the box
+        if (result.artist_alias_list === undefined || result.artist_alias_list.length == 0) {
+            var alias = "N/A, ";
+            temp.innerHTML += alias;
+        }
+        // Else, list all the aliases
+        else {
+            for (alias of result.artist_alias_list) {
+                console.log(alias.artist_alias);
+                var aliasEdited = JSON.stringify(alias.artist_alias);
+                aliasEdited = aliasEdited.substring(1);
+                // Connect multiple aliases with a comma
+                aliasEdited = aliasEdited.replace('"', ", ");
+                temp.innerHTML += aliasEdited;
+            }
+        }
+        // remove last comma
+        temp.innerHTML = temp.innerHTML.substring(0, temp.innerHTML.length-2);
+        displayAlias.appendChild(temp);
+    })
+
     // Add Title
     let displayTitle = document.createElement("div");
     displayTitle.appendChild(document.createTextNode(`Title: ${title}`));
@@ -142,10 +205,12 @@ function createModalInfo(title, artist, album, artwork, songNum, songID) {
     modalContainer.appendChild(displayArt);
     modalContainer.appendChild(displayLyrics);
     modalContainer.appendChild(displayCopy);
-
     modalContainer.appendChild(displayTitle);
     modalContainer.appendChild(displayArtist);
+    modalContainer.appendChild(displayAlias);
     modalContainer.appendChild(displayAlbum);
+    modalContainer.appendChild(displayPreview);
+
 }
 
 
@@ -167,7 +232,7 @@ function createCard(song, songNum){
     let artistInfo = document.createTextNode(`Artist: ${song.artist}`);
     let titleInfo = document.createTextNode(`Song: ${song.title}`);
     let albumInfo = document.createTextNode(`Album: ${song.album}`);
-    cardArtwork.alt = `${song.album} Cover`;
+    // cardArtwork.src = song.artwork;
 
     // Fetch and set the artwork
     let artResults = getSpotifyAlbumArt(song.artist);
@@ -175,7 +240,7 @@ function createCard(song, songNum){
         console.log(result);
         cardArtwork.src = result.url;
         // set Modal Info based off of cards
-        createModalInfo(song.title, song.artist, song.album, result.url, songNum, song.id);
+        createModalInfo(song.title, song.artist, song.artistID, song.album, result.url, songNum, song.id);
     })
 
     cardArtist.className += "card-artist";
