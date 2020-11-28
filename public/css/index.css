@@ -1,11 +1,24 @@
+/* Setting up the color scheme */
+:root {
+  --darkGray: #222831;
+  --medGray: #393e46;
+  --teal: #184e51;
+  --peach: #f7bda7;
+  --offWhite: #eee;
+}
+
 body {
-  background-color: white; /* change later */
+  background-color: var(--darkGray); /* change later */
   color: black;
+  margin: 0px;
 }
 
 /* Nav Bar */
 .grid {
   display: grid;
+  background-color: var(--medGray);
+  border-bottom: solid 2px var(--peach);
+  height: 48px;
 }
 
 /* Nav Bar List */
@@ -16,6 +29,16 @@ nav li {
 nav a {
   text-decoration: none;
 }
+
+nav a i {
+  color: var(--offWhite);
+}
+
+nav ul {
+  padding-left: 12px;
+  margin-top: 12px;
+}
+
 /* CSS Grid Styles */
 .grid-container {
   display: grid;
@@ -34,6 +57,10 @@ nav a {
   height: 120px;
 }
 
+h1 {
+  color: var(--peach);
+}
+
 /* Search Styles */
 .search {
 }
@@ -45,19 +72,37 @@ nav a {
 
 .searchbtn {
   width: 50px;
-  height: 35px;
+  height: 36px;
+  position: relative;
+  bottom: -6px;
 }
 
 /* About Styles */
 .about {
-  background-color: rgb(236, 236, 236);
+  background-color: var(--darkGray);
   width: 60%;
 }
 
 .about h2 {
   text-align: center;
+  background-color: var(--medGray);
+  color: var(--offWhite);
+  margin: 0px;
+  padding: 10px 0px;
+  border: 2px solid var(--peach);
+  border-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .about p {
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
+  background-color: var(--teal);
+  color: var(--offWhite);
+  margin: 0px;
+  border: 2px solid var(--peach);
+  border-top: none;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
