@@ -138,7 +138,12 @@ function getSpotifyAlbumArt(albumName)
                     */
                     console.log('getSpotifyAlbumArt() Fulfilled:', data.albums.items)
                     // If can't find album, then return a pre-defined image
-                    resolve (data.albums.items[0].images[1])
+                    if (data.albums.items.length == 0) {
+                        let result = {url: "/img/image-not-found.png"}
+                        resolve (result);
+                    }
+                    else
+                        resolve (data.albums.items[0].images[1])
                  })
                 .catch(error =>
                 {
