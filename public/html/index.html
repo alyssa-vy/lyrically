@@ -8,13 +8,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Add index.css styles -->
         <link rel="stylesheet" type="text/css" href="../css/index.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script type="require" src="api.js"></script>
     </head>
     <body>
         <!-- Navbar -->
         <nav class="grid">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href= "index.html"><i class="material-icons">home</i></a></li>
             </ul>
         </nav>
         <!-- Start of CSS Grid -->
@@ -26,7 +27,7 @@
             <div class="grid-item search">
                 <form id="form">
                     <input class="searchbar" type="text" placeholder="Enter lyrics!" id="searchlyrics">
-                    <button class="searchbtn" type="submit" onclick="performSearch(document.getElementById('searchlyrics').value)">Go</button>
+                    <button class="searchbtn" type="submit" onclick="performSearch(document.getElementById('searchlyrics').value)"><i class="material-icons md-dark">search</i></button>
                 </form>
             </div>
            
