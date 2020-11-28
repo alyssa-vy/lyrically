@@ -7,6 +7,9 @@ const fetch = require('node-fetch')
 const { request } = require('http')
 const { response } = require('express')
 require('dotenv').config()
+// Const Starter Pack
+const hostname = 'localhost'
+const port = process.env.PORT || 3000
 
 // ********* Spotify NPM *********
 const SpotifyWebApi = require('spotify-web-api-node')
@@ -29,10 +32,6 @@ spotifyApi.clientCredentialsGrant().then(
     }
 )
 // ********* End Spotify NPM *********
-
-// Const Starter Pack
-const hostname = 'localhost'
-const port = process.env.PORT || 3000
 
 app.use(express.static(path.join(__dirname, 'public')))
 
