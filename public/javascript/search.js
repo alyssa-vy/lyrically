@@ -51,7 +51,10 @@ function convertResults(lyric) {
                     title: result.track.track_name,
                     album: result.track.album_name,
                     id: result.track.track_id,
+                    release: result.track.track_rating,
+                    artistID: result.track.artist_id,
                 };
+
                 // add the song to the results
                 songResults.push(song);
             }
