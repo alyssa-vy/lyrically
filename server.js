@@ -117,6 +117,28 @@ app.get('/albums/:album_name', async (request, response) =>
     response.json(results.body)      
 })
 
+// Get Track Preview from Spotify ID
+app.get('/tracks/:track_id', async (request, response) =>
+{
+    // Get the Track ID
+    const track_id = request.params.track_id
+    console.log(track_id)
+    let result = await spotifyApi.getTrack(track_id);
+    
+    console.log(result.body.preview_url)
+    response.json(result.body.preview_url);      
+})
+
+app.get('/search/:artist&:track', async (request, response) =>
+{
+    // Get the Track ID
+    const artist = request.params.artist;
+    const track = request.params.track;
+    console.log(`Artist: ${artist}, Track: ${track}`);
+    let result = await spotifyApi.searchTracks(`artist:${artist} track:${track}`);
+    console.log(result.body);
+    response.json(result.body);      
+})
 app.listen(port, hostname, () => 
 {
     console.log(`Server running at http://${hostname}:${port}/`)

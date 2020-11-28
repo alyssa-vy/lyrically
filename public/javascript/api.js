@@ -1,5 +1,7 @@
 // fetching api data
 
+const SpotifyWebApi = require("spotify-web-api-node")
+
 // Returns an Array of 10 Songs
 function getSong(input)
 {
@@ -141,6 +143,60 @@ function getSpotifyAlbumArt(albumName)
                 .catch(error =>
                 {
                     console.log('getSpotifyAlbumArt() Error:', error)
+                })
+    })
+}
+
+
+// Search for Track From Spotify
+function searchSpotifyTrack(artist, track)
+{
+    // Get Artist and Track Name
+    let url = `/search/${artist}&${track}`;
+    
+    return new Promise((resolve, reject) =>
+    {
+        fetch(url)
+            .then(response => 
+            {
+                console.log('searchSpotifyTrack() Response:', response)
+                    return response.json()
+                })
+                .then(data =>
+                {
+                    console.log('searchSpotifyTrack() Fulfilled:', data.tracks.items);
+                    resolve (data.tracks.items);
+                 })
+                .catch(error =>
+                {
+                    console.log('searchSpotifyTrack() Error:', error)
+                })
+    })
+}
+
+
+// Get Track Preview From Spotify
+function getSpotifyTrack(track_id)
+{
+    // Get Album Name
+    let url = `/tracks/${track_id}`
+    
+    return new Promise((resolve, reject) =>
+    {
+        fetch(url)
+            .then(response => 
+            {
+                console.log('getSpotifyTrack() Response:', response)
+                    return response.json()
+                })
+                .then(data =>
+                {
+                    console.log('getSpotifyTrack() Fulfilled:', data)
+                    resolve (data);
+                 })
+                .catch(error =>
+                {
+                    console.log('getSpotifyTrack() Error:', error)
                 })
     })
 }

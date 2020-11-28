@@ -128,7 +128,41 @@ function createModalInfo(title, artist, artistID, album, artwork, songNum, songI
         copyPara.innerHTML = copyright;
         
     })
+
+    // Create div for track preview
+    let displayPreview = document.createElement("div");
+    displayPreview.className += "modal__preview";
+    // Find Track in Spotify from Artist & Title
+    let track = searchSpotifyTrack(artist, title);
+    track.then( (result) => {
+        console.log("TEST searchSpotifyTrack: " + result);
+        if (result.length != 0) {
+            // get the uri or ID from the first result
+            var spotifyID = result[0].uri;
+            spotifyID = JSON.stringify(spotifyID);
+            // chop off irrelevant items
+            spotifyID = spotifyID.substring(15, spotifyID.length-1);
+            console.log(`Spotify ID = ${spotifyID}`); 
+            /*
+            let track_preview = getSpotifyTrack(spotifyID);
+            track_preview.then( (data) => {
+                console.log("Preview URL: " + data);
+            })
+            */
+            // Embed Spotify Preview !
+            let iframe = document.createElement("iframe");
+            iframe.src = `https://open.spotify.com/embed/track/${spotifyID}`;
+            iframe.frameborder = "0";
+            iframe.allowTransparency = "true";
+            iframe.allow = "encrypted-media";
+            displayPreview.appendChild(iframe);
+        }
+        else {
+            displayPreview.innerHTML = "No Preview Available";
+        }
+    });
     
+
     let displayAlias = document.createElement("div");
     displayAlias.className += "modal__alias";
     // Get Artist Info from Musixmatch API
@@ -171,11 +205,12 @@ function createModalInfo(title, artist, artistID, album, artwork, songNum, songI
     modalContainer.appendChild(displayArt);
     modalContainer.appendChild(displayLyrics);
     modalContainer.appendChild(displayCopy);
-
     modalContainer.appendChild(displayTitle);
     modalContainer.appendChild(displayArtist);
     modalContainer.appendChild(displayAlias);
     modalContainer.appendChild(displayAlbum);
+    modalContainer.appendChild(displayPreview);
+
 }
 
 
