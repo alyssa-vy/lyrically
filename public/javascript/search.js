@@ -41,6 +41,9 @@ function convertResults(lyric) {
         apiResults.then(data =>{
 
             // Put required data into a song object
+            if (data.length == 0) {
+                alert("Couldn't Find Songs with That Lyric! Search for another.");
+            }
             for (result of data){
                 // let artResults = getArt(result.track.album_id);
                 // artResults.then(art => {
