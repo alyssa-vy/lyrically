@@ -8,7 +8,7 @@ const { request } = require('http')
 const { response } = require('express')
 require('dotenv').config()
 // Const Starter Pack
-const hostname = 'localhost'
+const hostname = '0.0.0.0'
 const port = process.env.PORT || 3000
 
 // ********* Spotify NPM *********
