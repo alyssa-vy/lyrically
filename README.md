@@ -44,8 +44,6 @@ We didn't start off knowing everything. In order to make Lyrically possible, we 
 
 - Jonny Kalambay - [Deploy your first App with Heroku and Node.js](https://www.youtube.com/watch?v=MxfxiR8TVNU)
 
-- [https://developer.musixmatch.com/documentation](https://developer.musixmatch.com/documentation)
-
 - Micromodal Demo [https://gist.github.com/ghosh/4f94cf497d7090359a5c9f81caf60699](https://gist.github.com/ghosh/4f94cf497d7090359a5c9f81caf60699)
 
 - Micromodal JS Demo [https://codepen.io/scalblog/pen/ERzzVE](https://codepen.io/scalblog/pen/ERzzVE)
