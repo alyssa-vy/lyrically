@@ -157,3 +157,7 @@ a {
   border: none;
   cursor: pointer;
 }
+
+.navbar .search-container label {
+  display: none;
+}

@@ -62,9 +62,6 @@ h1 {
 }
 
 /* Search Styles */
-.search {
-}
-
 .searchbar {
   width: 200px;
   height: 30px;
@@ -75,6 +72,10 @@ h1 {
   height: 36px;
   position: relative;
   bottom: -6px;
+}
+
+.search form label {
+  display: none;
 }
 
 /* About Styles */
