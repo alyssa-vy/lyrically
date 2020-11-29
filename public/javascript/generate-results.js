@@ -232,7 +232,8 @@ function createCard(song, songNum){
     let artistInfo = document.createTextNode(`Artist: ${song.artist}`);
     let titleInfo = document.createTextNode(`Song: ${song.title}`);
     let albumInfo = document.createTextNode(`Album: ${song.album}`);
-    // cardArtwork.src = song.artwork;
+
+    cardArtwork.alt = `${song.title} Cover`;
 
     // Fetch and set the artwork
     let artResults = getSpotifyAlbumArt(song.artist);
