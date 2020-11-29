@@ -74,6 +74,10 @@ h1 {
   bottom: -6px;
 }
 
+.search form label {
+  display: none;
+}
+
 /* About Styles */
 .about {
   background-color: var(--darkGray);
